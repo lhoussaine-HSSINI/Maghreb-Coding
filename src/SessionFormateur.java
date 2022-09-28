@@ -20,5 +20,11 @@ public class SessionFormateur {
         System.out.println("nom : "+this.nom + "\nprenom : " + this.prenom  + "\nmodule : " + this.module + "\ncin : " +
                 this.cin+ "\nusername : " +this.username);
     }
+    public void printformateur() {
+        System.out.println(" ===> " +this.nom + " " + this.prenom);
+    }
+    public String printoneformateur() {
+        return this.nom + " " + this.prenom;
+    }
 
 }

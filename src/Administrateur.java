@@ -114,7 +114,9 @@ public class Administrateur {
                     break;
                 case 3:
                     System.out.println("-------------------- Promos ---------------3------------------");
-                    Login.apprenant_login();
+                    SessionPromo.dashboard_promo();
+                    if (SessionPromo.fa == 4)
+                        str = 4;
                     break;
                 case 4:
                     break;

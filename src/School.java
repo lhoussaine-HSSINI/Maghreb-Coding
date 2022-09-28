@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class School {
-    public void Afficher() {
+    public static void Afficher() {
         System.out.println("--------------------Bienvenue dans le plateforme  FAHOWORLD---------------------------------");
         Scanner sc = new Scanner(System.in);
         System.out.println("Saisir votre choix : 1)Administrateur     2)Formateur   3)Apprenant   4)Quitter");

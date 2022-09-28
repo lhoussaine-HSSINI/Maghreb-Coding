@@ -17,4 +17,7 @@ public class Promo {
     public static HashMap<String, Integer> get_promo(){
         return list_promo_fomateur;
     }
+    public static int get_number_of_apprenant_in_promo(String nompromo){
+        return list_promo_apprenant.get(nompromo).size();
+    }
 }

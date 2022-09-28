@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -40,8 +39,7 @@ public class SessionPromo {
 //                    System.out.println(list_promo_have_index);
                     break;
                 case 4:
-//                                System.out.println("Quitter");
-//                                System.exit(0);
+
                     break;
                 default:
                     System.out.println("Choix incorrect");

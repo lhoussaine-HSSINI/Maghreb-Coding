@@ -119,6 +119,7 @@ public class Administrateur {
                         str = 4;
                     break;
                 case 4:
+                    School.Afficher();
                     break;
                 default:
                     System.out.println("Choix incorrect");

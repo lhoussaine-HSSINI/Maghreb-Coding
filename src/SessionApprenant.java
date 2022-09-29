@@ -21,4 +21,8 @@ public class SessionApprenant {
                 this.cin+ "\nusername : " +this.username);
     }
 
+    public void printapprenant() {
+        System.out.println(" ===> " +this.nom + " " + this.prenom);
+    }
+
 }

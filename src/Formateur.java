@@ -2,11 +2,15 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
 public class Formateur {
     public static ArrayList<SessionFormateur> info = new ArrayList<>();
+    public static HashMap<String, String> formateur_info_inside = new HashMap<>();
+    public static Apprenant apprenant = new Apprenant();
     public static  String nom, prenom, cin , module, username, password,  contry, promo_formateur;
-    public static int id;
+    public static Scanner sc = new Scanner(System.in);
+    public static int id, id_apprenant;
     public void add_info(){
         info.add(new SessionFormateur(this.nom,this.prenom,this.contry, this.cin,this.module, this.username, this.password));
     }
@@ -71,14 +75,72 @@ public class Formateur {
         return information_formateur;
     }
     public void Dashboard_Formateur(HashMap<String, String> formateur_info) {
+        formateur_info_inside= formateur_info;
         int str;
         id = Integer.valueOf(formateur_info.get("id"));
         promo_formateur= getPromo_formateur(id);
-        System.out.println("--------------------------------  plateforme  FAHOWORLD  -------------------------------");
-        System.out.println("--------------------------  Bienvenue Formateur "+ formateur_info.get("nom")+"  "+formateur_info.get("prenom")+" --------------------------");
-        System.out.println("------------------------------- Promo : "+promo_formateur +" -------------------------------");
-        System.out.println("----------------------------- les apprenant : "+Promo.get_number_of_apprenant_in_promo(promo_formateur) +"         les brief : 0"+" ----------------------------- ");
-        System.out.println("Saisir votre choix : 1)les Apprenant      2)les brief  3)Déconnexion");
+
+        do {
+            System.out.println("--------------------------------  plateforme  FAHOWORLD  -------------------------------");
+            System.out.println("--------------------------  Bienvenue Formateur "+ formateur_info.get("nom")+"  "+formateur_info.get("prenom")+" --------------------------");
+            System.out.println("------------------------------- Promo : "+promo_formateur +" -------------------------------");
+            System.out.println("----------------------------- les apprenant : "+Promo.get_number_of_apprenant_in_promo(promo_formateur) +"         les brief : 0"+" ----------------------------- ");
+            System.out.println("---------------------------------------------------------------------------------------------------");
+            System.out.println("Saisir votre choix : 1)les Apprenant      2)les brief  3)Déconnexion");
+            str = sc.nextInt();
+            int choix = str;
+            Login login = new Login();
+            switch (choix){
+                case 1:
+                    int f;
+                    boolean by,dazt;
+                    do {
+                        dazt= true;
+                        by = true;
+                        System.out.println("---------------------------------------- les Apprenant ----------------------------------------");
+                        System.out.println("Saisir votre choix : 1)Ajouter  Apprenant     2)Afficher les Apprenant   3)Dashboard   4)Déconnexion");
+                        f = sc.nextInt();
+                        int some_apprenat;
+                        switch (f) {
+                            case 1:
+                                Scanner fr = new Scanner(System.in);
+                                do{
+                                    int test_id_apprenant;
+                                    System.out.println("les  apprenant ");
+                                    some_apprenat = apprenant.all_apprenant_pour_ajouter_promo_size();
+                                    ArrayList<Integer> list_id_apprenant = apprenant.print_all_apprenant_pour_ajouter_promo();
+                                    test_id_apprenant = Integer.parseInt(fr.nextLine());
+                                    if (test_id_apprenant > 0 || test_id_apprenant <some_apprenat+1){
+                                        id_apprenant = list_id_apprenant.get(test_id_apprenant-1);
+                                        Promo.ajouter_apprenant_to_promo(promo_formateur, id_apprenant);
+                                        dazt = false;
+                                    }
+                                }while(dazt);
+
+                                break;
+                            case 2:
+                                System.out.println("apprenants en promotion : "+promo_formateur);
+                                apprenant.print_all_apprenant_pour_ma_promo(promo_formateur);
+                                break;
+                            default:
+                                System.out.println("Choix incorrect");
+                                break;
+                        }
+                        if (f == 3 || f == 4)
+                            by = false;
+                    } while (by);
+                    if (f == 4)
+                        str = 4;
+                    break;
+                case 2:
+                    System.out.println("les briefs =============================================>>>>>>>>>>>>>>>>");
+                    break;
+                default:
+                    System.out.println("Choix incorrect");
+                    break;
+            }
+        }while(str!=4);
+//        this.Dashboard_Formateur(formateur_info_inside);
     }
     public String getPromo_formateur(int id_f){
         String promonom = null;

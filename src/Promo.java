@@ -20,4 +20,8 @@ public class Promo {
     public static int get_number_of_apprenant_in_promo(String nompromo){
         return list_promo_apprenant.get(nompromo).size();
     }
+    public static ArrayList<Integer> get_array_list_of_apprenant_in_promo(String nompromo){
+        return list_promo_apprenant.get(nompromo);
+    }
+
 }

@@ -52,12 +52,13 @@ public class Administrateur {
                                 System.out.println("Afficher les Formateurs");
                                 formateur.print_all_formateur();
                                 break;
+                            case 3:
+                                break;
                             case 4:
-//                                System.out.println("Quitter");
-//                                System.exit(0);
                                 break;
                             default:
-                                System.out.println("Choix incorrect");
+                                if (f != 3 || f != 4)
+                                    System.out.println("Choix incorrect");
                                 break;
                         }
                         if (f == 3 || f == 4)

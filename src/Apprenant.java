@@ -2,9 +2,9 @@ import java.util.ArrayList;
 
 public class Apprenant {
     public static ArrayList<SessionApprenant> info = new ArrayList<>();
-    public static  String nom, prenom, cin , module, username, password,  contry;
+    public static  String nom, prenom, cin , email, username, password;
     public void add_info(){
-        info.add(new SessionApprenant(nom, prenom, contry, cin, module, username, password));
+        info.add(new SessionApprenant(nom, prenom, cin, email, username, password));
     }
     public void print_all_formateur() {
         int i = 1;
@@ -63,5 +63,4 @@ public class Apprenant {
             i++;
         }
     }
-
 }

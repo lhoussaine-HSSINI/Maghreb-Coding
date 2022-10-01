@@ -1,3 +1,4 @@
+import javax.mail.MessagingException;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -12,8 +13,7 @@ public class Login {
     public static Login login = new Login();
     public  static String username , password;
     public  static boolean daz = false;
-    public static void administrateur_login()
-    {
+    public static void administrateur_login() throws MessagingException {
         do{
             System.out.println("Saisir username :");
             Scanner sc = new Scanner(System.in);
@@ -34,8 +34,7 @@ public class Login {
         }
 
     }
-    public static void formateur_login()
-    {
+    public static void formateur_login() throws MessagingException {
         do{
             System.out.println("Saisir username :");
             Scanner sc = new Scanner(System.in);

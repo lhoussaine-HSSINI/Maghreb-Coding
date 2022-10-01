@@ -1,3 +1,4 @@
+import javax.mail.MessagingException;
 import java.util.Scanner;
 
 public class Administrateur {
@@ -8,7 +9,7 @@ public class Administrateur {
     public boolean test_admin(String username, String password){
                      return this.admin[0].equals(username) && this.admin[1].equals(password);
     }
-    public void Dashboard_admin() {
+    public void Dashboard_admin() throws MessagingException {
         int str;
         System.out.println("-------------------------------  plateforme  FAHOWORLD  -------------------------------");
         System.out.println("--------------------------  Bienvenue l'administrateur Elias --------------------------");
@@ -40,8 +41,8 @@ public class Administrateur {
                                 Formateur.nom = nom;
                                 System.out.println("Saisir cin :");
                                 Formateur.cin = fr.nextLine();
-                                System.out.println("Saisir module :");
-                                Formateur.module = fr.nextLine();
+//                                System.out.println("Saisir module :");
+//                                Formateur.module = fr.nextLine();
                                 System.out.println("Saisir contry :");
                                 Formateur.contry = fr.nextLine();
                                 Formateur.username = Formateur.nom+"."+Formateur.prenom+ "@youcode.ma";
@@ -67,7 +68,6 @@ public class Administrateur {
                     if (f == 4)
                         str = 4;
                     break;
-
                 case 2:
                     System.out.println("-------------------- les Apprenants ---------------2------------------");
                     int fa;
@@ -87,10 +87,10 @@ public class Administrateur {
                                 Apprenant.nom = nom;
                                 System.out.println("Saisir cin :");
                                 Apprenant.cin = fr.nextLine();
-                                System.out.println("Saisir module :");
-                                Apprenant.module = fr.nextLine();
-                                System.out.println("Saisir contry :");
-                                Apprenant.contry = fr.nextLine();
+                                System.out.println("Saisir email :");
+                                Apprenant.email = fr.nextLine();
+//                                System.out.println("Saisir contry :");
+//                                Apprenant.contry = fr.nextLine();
                                 Apprenant.username = Apprenant.nom+"."+Apprenant.prenom+ "@youcode.ma";
                                 Apprenant.password = Login.generate_code(Apprenant.cin);
                                 apprenant.add_info();

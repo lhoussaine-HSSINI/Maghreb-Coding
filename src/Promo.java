@@ -8,6 +8,7 @@ public class Promo {
 
     public static  void ajouter_promo(String name_promo, int index_of_formateur){
         list_promo.add(name_promo);
+        Brief.ajouter_promo_a_brief(name_promo);
         list_promo_apprenant.put(name_promo,new ArrayList<Integer>());
         list_promo_fomateur.put(name_promo,index_of_formateur);
     }

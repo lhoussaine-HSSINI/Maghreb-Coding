@@ -1,3 +1,4 @@
+import javax.mail.MessagingException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -6,16 +7,17 @@ import java.util.Scanner;
 
 public class Formateur {
     public static ArrayList<SessionFormateur> info = new ArrayList<>();
+    public static ArrayList<String> info_brief = new ArrayList<>();
     public static HashMap<String, String> formateur_info_inside = new HashMap<>();
     public static Apprenant apprenant = new Apprenant();
-    public static  String nom, prenom, cin , module, username, password,  contry, promo_formateur;
+    public static  String nom, prenom, cin , username, password,  contry, promo_formateur, Titre, Contexte_du_projet, Modalités_pédagogiques,Livrables;
     public static Scanner sc = new Scanner(System.in);
     public static int id, id_apprenant;
     public void add_info(){
-        info.add(new SessionFormateur(this.nom,this.prenom,this.contry, this.cin,this.module, this.username, this.password));
+        info.add(new SessionFormateur(this.nom,this.prenom,this.contry, this.cin, this.username, this.password));
     }
     public void add_info(SessionFormateur formateur){
-        info.add(new SessionFormateur(this.nom,this.prenom,this.contry, this.cin,this.module, this.username, this.password));
+        info.add(new SessionFormateur(this.nom,this.prenom,this.contry, this.cin, this.username, this.password));
     }
 
     public void print_all_formateur() {
@@ -74,7 +76,7 @@ public class Formateur {
         }
         return information_formateur;
     }
-    public void Dashboard_Formateur(HashMap<String, String> formateur_info) {
+    public void Dashboard_Formateur(HashMap<String, String> formateur_info) throws MessagingException {
         formateur_info_inside= formateur_info;
         int str;
         id = Integer.valueOf(formateur_info.get("id"));
@@ -84,7 +86,7 @@ public class Formateur {
             System.out.println("--------------------------------  plateforme  FAHOWORLD  -------------------------------");
             System.out.println("--------------------------  Bienvenue Formateur "+ formateur_info.get("nom")+"  "+formateur_info.get("prenom")+" --------------------------");
             System.out.println("------------------------------- Promo : "+promo_formateur +" -------------------------------");
-            System.out.println("----------------------------- les apprenant : "+Promo.get_number_of_apprenant_in_promo(promo_formateur) +"         les brief : 0"+" ----------------------------- ");
+            System.out.println("----------------------------- les apprenant : "+Promo.get_number_of_apprenant_in_promo(promo_formateur) +"         les brief : "+Brief.get_number_of_brief_promo(promo_formateur)+" ----------------------------- ");
             System.out.println("---------------------------------------------------------------------------------------------------");
             System.out.println("Saisir votre choix : 1)les Apprenant      2)les brief  3)Déconnexion");
             str = sc.nextInt();
@@ -133,13 +135,66 @@ public class Formateur {
                         str = 4;
                     break;
                 case 2:
-                    System.out.println("les briefs =============================================>>>>>>>>>>>>>>>>");
+                    int i;
+                    boolean  by_brief;
+
+                    do {
+                        dazt= true;
+                        by_brief = true;
+                        System.out.println("---------------------------------------- les briefs ----------------------------------------");
+                        System.out.println("Saisir votre choix : 1)Ajouter  Brief     2)Afficher les Brief   3)Dashboard   4)Déconnexion");
+                        i = sc.nextInt();
+                        switch (i) {
+                            case 1:
+                                Scanner br = new Scanner(System.in);
+                                do{
+                                    System.out.println("Titre :");
+                                    Titre = String.valueOf(br.nextLine());
+                                    System.out.println("Contexte du projet :");
+                                    Contexte_du_projet = br.nextLine();
+                                    System.out.println("Modalités pédagogiques :");
+                                    Modalités_pédagogiques = br.nextLine();
+                                    System.out.println("Livrables :");
+                                    Livrables = br.nextLine();
+                                    if (Titre.isEmpty() || Contexte_du_projet.isEmpty()|| Modalités_pédagogiques.isEmpty() || Livrables.isEmpty()){
+                                        System.out.println(" xihaja na9sa khawya ");
+                                    }else {
+                                        dazt = false;
+                                        info_brief.add(promo_formateur);
+                                        info_brief.add(formateur_info.get("prenom")+" "+ formateur_info.get("nom"));
+                                        info_brief.add(Titre);
+                                        info_brief.add(Contexte_du_projet);
+                                        info_brief.add(Modalités_pédagogiques);
+                                        info_brief.add(Livrables);
+                                        Brief.ajouter_brief(promo_formateur,info_brief);
+                                        MessageToApprenant.go();
+                                    }
+
+                                }while(dazt);
+
+                                break;
+                            case 2:
+                                System.out.println("---------------------------------------- les briefs ----------------------------------------");
+                                Brief.print_ma_les_brief(promo_formateur);
+                                break;
+                            default:
+                                System.out.println("Choix incorrect");
+                                break;
+                        }
+                        if (i == 3 || i == 4)
+                            by_brief = false;
+                    }while(by_brief);
+                    if (i == 4)
+                        str = 3;
                     break;
                 default:
-                    System.out.println("Choix incorrect");
+                    if (choix  == 3)
+                        str  = 4;
+                    else
+                        System.out.println("Choix incorrect");
                     break;
             }
-        }while(str!=4);
+        }while(str!=3);
 //        this.Dashboard_Formateur(formateur_info_inside);
     }
     public String getPromo_formateur(int id_f){

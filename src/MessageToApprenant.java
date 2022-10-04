@@ -6,10 +6,9 @@ import java.util.Properties;
 public class MessageToApprenant {
     public static void go() throws MessagingException {
         //authentication info
-        final String username = "postmaster@sandbox1b37be2fc27f43cf8245faad899dfa58.mailgun.org";
-//        final String password = "FaHo1998HssInI1995KaRkach";
-        final String password = "a3648d159d460196959f69b5e30cca09-523596d9-0c06dc55";
-        String toEmail = "bontop.2018@gmail.com";
+        final String username = "";
+        final String password = "";
+        String toEmail = "";
 
         Properties properties = new Properties();
         properties.put("mail.smtp.auth", "true");

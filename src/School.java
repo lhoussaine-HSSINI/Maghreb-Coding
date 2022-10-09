@@ -1,8 +1,9 @@
 import javax.mail.MessagingException;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class School {
-    public static void Afficher() throws MessagingException {
+    public static void Afficher() throws MessagingException, IOException {
         System.out.println("--------------------Bienvenue dans le plateforme  FAHOWORLD---------------------------------");
         Scanner sc = new Scanner(System.in);
         System.out.println("Saisir votre choix : 1)Administrateur     2)Formateur   3)Apprenant   4)Quitter");

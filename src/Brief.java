@@ -17,7 +17,12 @@ public class Brief {
 
     public static void print_ma_les_brief(String promo_formateur){
         for(int i = 1 ;i<=brief.get(promo_formateur).size();i++){
-            System.out.println(i+" ==> "+brief.get(promo_formateur).get(i).get(2));
+            try {
+                System.out.println(i+" ==> "+brief.get(promo_formateur).get(i).get(2));
+            }catch (Exception e){
+
+            }
+
         }
     }
 

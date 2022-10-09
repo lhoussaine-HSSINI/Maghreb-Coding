@@ -1,4 +1,5 @@
 import javax.mail.MessagingException;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Administrateur {
@@ -9,7 +10,7 @@ public class Administrateur {
     public boolean test_admin(String username, String password){
                      return this.admin[0].equals(username) && this.admin[1].equals(password);
     }
-    public void Dashboard_admin() throws MessagingException {
+    public void Dashboard_admin() throws MessagingException, IOException {
         int str;
         System.out.println("-------------------------------  plateforme  FAHOWORLD  -------------------------------");
         System.out.println("--------------------------  Bienvenue l'administrateur Elias --------------------------");
@@ -91,7 +92,7 @@ public class Administrateur {
                                 Apprenant.email = fr.nextLine();
 //                                System.out.println("Saisir contry :");
 //                                Apprenant.contry = fr.nextLine();
-                                Apprenant.username = Apprenant.nom+"."+Apprenant.prenom+ "@youcode.ma";
+                                Apprenant.username = Apprenant.email;
                                 Apprenant.password = Login.generate_code(Apprenant.cin);
                                 apprenant.add_info();
                                 break;
@@ -99,15 +100,20 @@ public class Administrateur {
                                 System.out.println("Afficher les Apprenants");
                                 apprenant.print_all_formateur();
                                 break;
-                            case 4:
-//                                System.out.println("Quitter");
-//                                System.exit(0);
-                                break;
                             default:
-                                System.out.println("Choix incorrect");
+                                try {
+                                    if (fa<1 || fa>3|| fa!=4)
+                                        System.out.println("Choix incorrect");
+                                    else if(fa==4){
+                                        byy = false;
+                                        School.Afficher();
+                                    }
+                                }catch (Exception e) {
+                                    System.out.println("Choix incorrect");
+                                }
                                 break;
                         }
-                        if (fa == 3 || fa == 4)
+                        if (fa == 3)
                             byy = false;
                     } while (byy);
                     if (fa == 4)

@@ -1,4 +1,5 @@
 import javax.mail.MessagingException;
+import java.io.IOException;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -9,11 +10,12 @@ public class Login {
     public static boolean check = false;
     public static Administrateur Admin = new Administrateur();
     public static Formateur formateur = new Formateur();
+    public static Apprenant apprenant = new Apprenant();
     public static HashMap<String, String> information_user_login = new HashMap<>();
     public static Login login = new Login();
     public  static String username , password;
     public  static boolean daz = false;
-    public static void administrateur_login() throws MessagingException {
+    public static void administrateur_login() throws MessagingException, IOException {
         do{
             System.out.println("Saisir username :");
             Scanner sc = new Scanner(System.in);
@@ -34,7 +36,7 @@ public class Login {
         }
 
     }
-    public static void formateur_login() throws MessagingException {
+    public static void formateur_login() throws MessagingException, IOException {
         do{
             System.out.println("Saisir username :");
             Scanner sc = new Scanner(System.in);
@@ -55,9 +57,27 @@ public class Login {
             Login.formateur_login();
         }
     }
-    public static void apprenant_login()
-    {
-
+    public static void apprenant_login() throws MessagingException, IOException {
+        do{
+            System.out.println("Saisir username :");
+            Scanner sc = new Scanner(System.in);
+            username = sc.nextLine();
+            System.out.println("Saisir password :");
+            password = sc.nextLine();
+            if (username.isEmpty() || password.isEmpty()){
+                System.out.println(" Réveille ne pas laisser les entries vides ");
+                check=true;
+            }
+        }while (check);
+        information_user_login = apprenant.test_apprenant(username, generate_code(password));
+        daz = Boolean.parseBoolean(information_user_login.get("login"));
+        if (daz){
+            apprenant.Dashboard_Apprenant(information_user_login);
+//            System.out.println(information_user_login);
+        }else{
+            System.out.println("  login errors  ");
+            Login.apprenant_login();
+        }
     }
 
     public static String generate_code(String input)
